@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator | UtilitySuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg-color: #f1f5f9; 
+            --primary: #4f46e5;
+            --success: #059669;
+            --text: #1e293b;
+            --border: #e2e8f0;
+            --font-family: 'Outfit', sans-serif;
+        }
+        body { margin: 0; font-family: var(--font-family); background-color: var(--bg-color); color: var(--text); display: flex; min-height: 100vh; }
+
+        .top-accent { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary); z-index: 1000; }
+
+        .sidebar { width: 260px; background: white; border-right: 1px solid var(--border); padding: 60px 20px; flex-shrink: 0; }
+        .brand { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.25em; color: #64748b; margin-bottom: 30px; padding-left: 20px; }
+        
+        #tools-sidebar { display: flex; flex-direction: column; }
+        .tool-btn { 
+            display: block; padding: 16px 20px; margin: 2px 0; border-radius: 10px; 
+            text-decoration: none; color: #475569; font-size: 13px; font-weight: 600; 
+            transition: all 0.2s; border-bottom: 1px solid #f8fafc;
+        }
+        .tool-btn:hover { background: #f5f3ff; color: var(--primary); border-bottom-color: #e0e7ff; }
+
+        .main-content { flex: 1; padding: 60px 40px; display: flex; flex-direction: column; align-items: center; }
+        .wrapper { max-width: 800px; width: 100%; }
+
+        h1 { margin: 0 0 40px 0; color: #0f172a; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; }
+
+        .ad-container { display: flex; justify-content: center; margin: 20px 0; overflow: hidden; }
+        
+        .card { background: white; padding: 32px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+        
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #64748b; }
+        input[type="number"] { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; box-sizing: border-box; font-size: 16px; outline: none; }
+        input:focus { border-color: var(--primary); }
+
+        .btn-action { width: 100%; padding: 18px; border: none; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; background-color: var(--primary); color: white; transition: 0.2s; margin-top: 20px; font-family: var(--font-family); }
+        .btn-action:hover { filter: brightness(1.1); }
+
+        #results { display: none; margin-top: 30px; padding-top: 30px; border-top: 1px solid var(--border); }
+        .result-main { text-align: center; margin-bottom: 25px; }
+        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .result-box { background: #f8fafc; padding: 15px; border-radius: 10px; text-align: center; }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 30px 20px; }
+            .main-content { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-accent"></div>
+
+    <aside class="sidebar">
+        <div class="brand">UtilitySuite</div>
+        <div id="tools-sidebar"></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="wrapper">
+            <h1>Loan Calculator</h1>
+
+            <div class="ad-container">
+                <script>atOptions = {'key' : 'ea9023c6230a4134ea2bb21d415f3647', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {}};</script>
+                <script src="https://www.highperformanceformat.com/ea9023c6230a4134ea2bb21d415f3647/invoke.js"></script>
+            </div>
+
+            <div class="card">
+                <div class="input-group">
+                    <label>Loan Amount ($)</label>
+                    <input type="number" id="loan-amount" placeholder="25000">
+                </div>
+                <div class="input-group">
+                    <label>Annual Interest Rate (%)</label>
+                    <input type="number" id="interest-rate" placeholder="5.5" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label>Loan Term (Years)</label>
+                    <input type="number" id="loan-term" placeholder="5">
+                </div>
+                <button class="btn-action" onclick="calculateLoan()">CALCULATE</button>
+
+                <div id="results">
+                    <div class="result-main">
+                        <p style="font-size: 12px; text-transform: uppercase; color: #64748b;">Monthly Payment</p>
+                        <h2 id="monthly-payment" style="font-size: 32px; color: var(--primary); margin: 0;">$0.00</h2>
+                    </div>
+                    <div class="result-grid">
+                        <div class="result-box"><span>Principal</span><strong id="total-principal">$0.00</strong></div>
+                        <div class="result-box"><span>Interest</span><strong id="total-interest">$0.00</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad-container">
+                <script>atOptions = {'key' : '7cf39fb102b8e5ac06d9ab8ec745e58c', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {}};</script>
+                <script src="https://www.highperformanceformat.com/7cf39fb102b8e5ac06d9ab8ec745e58c/invoke.js"></script>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function calculateLoan() {
+            const amount = parseFloat(document.getElementById('loan-amount').value);
+            const rate = parseFloat(document.getElementById('interest-rate').value);
+            const years = parseFloat(document.getElementById('loan-term').value);
+            const resultsDiv = document.getElementById('results');
+
+            if (isNaN(amount) || isNaN(rate) || isNaN(years)) return;
+
+            const monthlyRate = rate / 100 / 12;
+            const months = years * 12;
+            const x = Math.pow(1 + monthlyRate, months);
+            const monthly = (amount * x * monthlyRate) / (x - 1);
+
+            const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+            document.getElementById('monthly-payment').innerText = formatter.format(monthly);
+            document.getElementById('total-principal').innerText = formatter.format(amount);
+            document.getElementById('total-interest').innerText = formatter.format((monthly * months) - amount);
+            resultsDiv.style.display = 'block';
+        }
+
+        const tools = [
+            { name: "QR Generator", url: "https://zaraouilabs.github.io/QR-Code-Generator/" },
+            { name: "Image Compressor", url: "https://zaraouilabs.github.io/Image-Compressor/" },
+            { name: "Date Calculator", url: "https://zaraouilabs.github.io/Date-Calculator/" },
+            { name: "HEIC Converter", url: "https://zaraouilabs.github.io/HEIC-to-JPEG-converter/" },
+            { name: "WebP Converter", url: "https://zaraouilabs.github.io/webp-to-jpg-convertor/" },
+            { name: "JSON Formatter", url: "https://zaraouilabs.github.io/JSON-formatter/" },
+            { name: "Word Counter", url: "https://zaraouilabs.github.io/wordcount-pro/" },
+            { name: "Case Converter", url: "https://zaraouilabs.github.io/case-converter/" },
+            { name: "Percentage Calc", url: "https://zaraouilabs.github.io/percentage_counter/" },
+            { name: "Base64 Converter", url: "https://zaraouilabs.github.io/Base64_convertor/" },
+            { name: "Password Generator", url: "https://zaraouilabs.github.io/Password_Generator/" }
+        ];
+        document.getElementById('tools-sidebar').innerHTML = tools.map(t => `<a href="${t.url}" class="tool-btn">${t.name}</a>`).join('');
+    </script>
+    <script src="https://pl30403648.effectivecpmnetwork.com/8d/6e/16/8d6e16cf626599011a4b1d03060dc5cf.js"></script>
+</body>
+</html>
