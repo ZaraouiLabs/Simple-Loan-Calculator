@@ -54,7 +54,20 @@
         #results { display: none; margin-top: 30px; padding-top: 30px; border-top: 1px solid var(--border); }
         .result-main { text-align: center; margin-bottom: 25px; }
         .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .result-box { background: #f8fafc; padding: 15px; border-radius: 10px; text-align: center; }
+        .result-box { background: #f8fafc; padding: 15px; border-radius: 10px; text-align: center; display: flex; flex-direction: column; gap: 4px; }
+        .result-box span { font-size: 12px; text-transform: uppercase; color: #64748b; font-weight: 600; }
+        .result-box strong { font-size: 18px; color: var(--text); }
+
+        /* SEO Content Styles */
+        .info-section { background: white; padding: 32px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); margin-top: 25px; }
+        .info-section h2 { color: #0f172a; font-size: 1.4rem; font-weight: 700; margin-top: 0; margin-bottom: 12px; }
+        .info-section h3 { color: #334155; font-size: 1.1rem; font-weight: 600; margin-top: 20px; margin-bottom: 8px; }
+        .info-section p, .info-section li { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+        .info-section ol { padding-left: 20px; margin: 0; }
+        .info-section ol li { margin-bottom: 8px; }
+        .faq-item { margin-bottom: 16px; }
+        .faq-item:last-child { margin-bottom: 0; }
+        .privacy-badge { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 16px; border-radius: 12px; font-size: 0.9rem; margin-top: 20px; font-weight: 500; }
 
         @media (max-width: 768px) {
             body { flex-direction: column; }
@@ -106,7 +119,7 @@
 
                 <div id="results">
                     <div class="result-main">
-                        <p style="font-size: 12px; text-transform: uppercase; color: #64748b;">Monthly Payment</p>
+                        <p style="font-size: 12px; text-transform: uppercase; color: #64748b; margin: 0 0 6px 0;">Monthly Payment</p>
                         <h2 id="monthly-payment" style="font-size: 32px; color: var(--primary); margin: 0;">$0.00</h2>
                     </div>
                     <div class="result-grid">
@@ -119,6 +132,38 @@
             <div class="ad-container">
                 <script>atOptions = {'key' : '7cf39fb102b8e5ac06d9ab8ec745e58c', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {}};</script>
                 <script src="https://www.highperformanceformat.com/7cf39fb102b8e5ac06d9ab8ec745e58c/invoke.js"></script>
+            </div>
+
+            <!-- SEO Content & About Sections -->
+            <div class="info-section">
+                <h2>About UtilitySuite Loan Calculator</h2>
+                <p>The UtilitySuite Loan Calculator helps you estimate monthly installment payments, total interest costs, and total repayment amounts for personal loans, auto financing, student loans, or mortgages. Planning your budget beforehand gives you a clearer view of long-term borrowing costs.</p>
+
+                <h2>How to Calculate Your Loan Payments</h2>
+                <ol>
+                    <li><strong>Enter Loan Amount:</strong> Type the total borrowed principal amount in dollars.</li>
+                    <li><strong>Enter Interest Rate:</strong> Provide the annual percentage rate (APR) charged by your lender.</li>
+                    <li><strong>Set Loan Term:</strong> Enter the loan duration in years.</li>
+                    <li><strong>Calculate:</strong> Click <strong>"CALCULATE"</strong> to instantly view your monthly payment break-down, principal balance, and accumulated interest charges.</li>
+                </ol>
+
+                <h2>Frequently Asked Questions (FAQ)</h2>
+                <div class="faq-item">
+                    <h3>How are monthly payments calculated?</h3>
+                    <p>Payments are calculated using standard fixed-rate amortization formulas. The formula calculates equal monthly installments required to pay off both principal and accrued interest over the loan term.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Does this calculation include taxes or insurance?</h3>
+                    <p>No. This tool calculates base principal and interest payments. Additional expenses like property taxes, homeowner insurance, or loan origination fees are not included.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I use this for personal or car loans?</h3>
+                    <p>Yes, this simple loan calculator works for any standard fixed-rate borrowing arrangement including personal loans, vehicle loans, and fixed-rate mortgages.</p>
+                </div>
+
+                <div class="privacy-badge">
+                    🔒 <strong>Privacy First Note:</strong> All financial calculations run locally inside your browser. No financial details or input data are stored, logged, or shared across servers.
+                </div>
             </div>
         </div>
     </main>
